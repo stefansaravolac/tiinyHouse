@@ -1,27 +1,28 @@
-<script>
-function init(){
+<script type="text/javascript">
 
 	var geocoder;
 	var map;        
-	var country = 'United States';      
+	var country = 'United States';
 
-	var query = window.location.search;
-	  // Skip the leading ?, which should always be there,
-	  // but be careful anyway
-	  if (query.substring(0, 1) == '?') {
-		query = query.substring(1);
-	  }
-	  var data = query.split(',');
+	function getUrlParameters(){
+		var query = window.location.search;
+		// Skip the leading ?, which should always be there,
+		
+		// but be careful anyway
+		if (query.substring(0, 1) == '?') {
+			query = query.substring(1);
+		}
+		var data = query.split(',');
 
-	  for (i = 0; (i < data.length); i++) {
-		data[i] = unescape(data[i]);
-	  }
-
-
-
-	function codeAddress(urlPassedData) {
+		for (i = 0; (i < data.length); i++) {
+			data[i] = unescape(data[i]);
+		}
+		return data;
+	}
+	
+	function codeAddress(zipcode) {
 	  geocoder = new google.maps.Geocoder();
-	  var address = urlPassedData[0];
+	  var address = zipcode;
 	  geocoder.geocode({ 'address': address + ',' + country }, function (results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {                       
 
@@ -38,12 +39,34 @@ function init(){
 		  alert('Please go back to community page and enter valid zipcode');
 		}
 	  });
+	}
 
-	}   
-
-	codeAddress(data);
-
-}
+	$.ajax({
+		url: "http://ipinfo.io",
+		dataType: "jsonp",
+		success: function(data){
+		
+			console.log(data);
+			var cityRegion = data.city +', '+data.region,
+								
+			var dataFromUrl = getUrlParameters();	
+	
+			if(typeof dataFromUrl[0] !== 'undefined' && dataFromUrl[0] !== '' && dataFromUrl[0] !== 'false' && dataFromUrl[0] !== 'true' ){	 								
+					codeAddress(dataFromUrl[0]);
+			
+			} else{
+			
+				if(typeof data.city !== 'undefined' && typeof data.region !== 'undefined'){
+					ip = data.ip;
+					$('.city-region').text(cityRegion);
+					$('.ip').text(ip);
+					
+				} else{
+					$('.city-region').text("--------");
+				}
+			}			
+		}
+	});
 </script>
 
 
