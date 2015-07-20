@@ -1,0 +1,40 @@
+<script>
+
+  var data = [];
+
+  var query = window.location.search;
+  // Skip the leading ?, which should always be there,
+  // but be careful anyway
+  if (query.substring(0, 1) == '?') {
+    query = query.substring(1);
+  }
+  var data = query.split(',');
+
+  for (i = 0; (i < data.length); i++) {
+    data[i] = unescape(data[i]);
+  }
+
+
+function sendData()
+{
+ 
+
+  var dataLength = data.length;
+
+  data[dataLength]   = document.getElementById("one").checked;
+  data[dataLength+1] = document.getElementById("two").checked;
+  data[dataLength+2] = document.getElementById("three").checked;
+  data[dataLength+3] = document.getElementById("four").checked;
+
+  // Initialize packed or we get the word 'undefined'
+  var packed = "";
+  for (i = 0; (i < data.length); i++) {
+    if (i > 0) {
+      packed += ",";
+    }
+    packed += escape(data[i]);
+  }
+  window.location = "/timeline.html?" + packed;
+}
+
+</script>

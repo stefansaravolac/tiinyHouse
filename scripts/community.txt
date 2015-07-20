@@ -1,0 +1,20 @@
+<script>
+
+var data = [];
+
+function sendData()
+{
+  data[0] = document.getElementById("appendUrl").value;
+  // Initialize packed or we get the word 'undefined'
+  var packed = "";
+  for (i = 0; (i < data.length); i++) {
+    if (i > 0) {
+      packed += ",";
+    }
+    packed += escape(data[i]);
+  }
+  window.location = "/questions.html?" + packed;
+}
+
+
+</script>

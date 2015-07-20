@@ -1,0 +1,51 @@
+<script>
+function init(){
+
+	var geocoder;
+	var map;        
+	var country = 'United States';      
+
+	var query = window.location.search;
+	  // Skip the leading ?, which should always be there,
+	  // but be careful anyway
+	  if (query.substring(0, 1) == '?') {
+		query = query.substring(1);
+	  }
+	  var data = query.split(',');
+
+	  for (i = 0; (i < data.length); i++) {
+		data[i] = unescape(data[i]);
+	  }
+
+
+
+	function codeAddress(urlPassedData) {
+	  geocoder = new google.maps.Geocoder();
+	  var address = urlPassedData[0];
+	  geocoder.geocode({ 'address': address + ',' + country }, function (results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {                       
+
+		  for (var component in results[0]['address_components']) {
+			for (var i in results[0]['address_components'][component]['types']) {
+			  if (results[0]['address_components'][component]['types'][i] == "administrative_area_level_1") {
+				state = results[0]['address_components'][component]['long_name'];
+				//alert(results[0]['address_components'][1]['long_name'] + ' , '  + state);
+				document.getElementById("city").innerHTML = results[0]['address_components'][1]['long_name'] + ' , '  + state;
+			  }
+			}
+		  }                                           
+		} else {      
+		  alert('Please go back to community page and enter valid zipcode');
+		}
+	  });
+
+	}   
+
+	codeAddress(data);
+
+}
+</script>
+
+
+
+
