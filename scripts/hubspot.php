@@ -16,11 +16,12 @@
 		print_r($createdContact);
 		$newly_created_vid = $createdContact->{'vid'};
 		
-			//Update Contact
+	/*		
+		//Update Contact
 		$params =  array('lastname' => 'Test' );
 		$updatedContact = $contacts->update_contact($newly_created_vid,$params);
 		print_r($updatedContact);
-			
+	*/		
 	
 		
 ?>
