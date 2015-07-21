@@ -10,12 +10,12 @@
     
 			
 			//Create Contact
-		$params =  array('email' => $email, 'firstname' => 'John' );
+		$params =  array('email' => $email, 'firstname' => '' );
 		$createdContact = $contacts->create_contact($params);
 		//print_r($createdContact);
 		$newly_created_vid = $createdContact->{'vid'};
 		
-		header("Location: http://tiinyhouse.com/thanks.html"); /* Redirect browser */
+		header("Location: http://tiinyhouse.com/thanks"); /* Redirect browser */
 		exit();
 		
 	/*		
