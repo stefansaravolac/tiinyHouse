@@ -4,7 +4,7 @@
 		
 		$HAPIKey = '18996f4a-fb67-4f8a-8f91-6ba88e5a9f56';
 		
-		$email = $_POST["entry.518332116"]; //GET AN EMAIL FROM FORM
+		$email = $_POST["email"]; //GET AN EMAIL FROM FORM
 		print_r($email);
 		$contacts = new HubSpot_Contacts($HAPIKey);
     
