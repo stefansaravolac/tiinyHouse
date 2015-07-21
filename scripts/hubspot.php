@@ -7,16 +7,6 @@
 		
 		//ONLY ONE FORM WILL BE CALLED AT ONE TIME
 		//FOR DENVER_CO CONTACT FORM
-		
-		print_r("BEGINNING-------------------");		
-		print_r($_POST['denver_co_name']);
-		print_r("-------------------");		
-		print_r($_POST['denver_co_email']);
-		print_r("-------------------");	
-		print_r($_POST['denver_co_phone']);		
-		
-		
-		
 		if(isset($_POST['denver_co_name'])){
 			$firstname = $_POST['denver_co_name'];			
 		} else{
@@ -29,12 +19,13 @@
 		
 		if(isset($_POST['denver_co_phone'])){
 			$phone = $_POST['denver_co_phone'];
+            $city  = 'Denver';
 		} else{
 			$phone = '';
+            $city = '';
 		}		
 	
 
-/*	
 		//FOR PLAN FORM
 		if( isset($_POST['zipcode']) ){
 			$zipcode = $_POST["zipcode"]; 
@@ -81,11 +72,7 @@
 		if( isset($_POST["email"]) ){
 			$email = $_POST["email"]; 
 		} 
-*/			
-		
-		
-		
-		print_r("END-------------------");
+
 		$contacts = new HubSpot_Contacts($HAPIKey);
     
 	
@@ -99,19 +86,20 @@
 						 'cost' 		=> $cost,
 						 'days' 		=> $days,
 						 'email' 		=> $email,
-						 'phone'		=> $phone);
+						 'phone'		=> $phone,
+                         'city'         => $city);
 						 
 		
-		print_r("Params: ");
-		print_r($params);
+		//print_r("Params: ");
+		//print_r($params);
 		
 		$createdContact = $contacts->create_contact($params);
-		print_r("Created contact: ");
-		print_r($createdContact);
+		//print_r("Created contact: ");
+		//print_r($createdContact);
 		$newly_created_vid = $createdContact->{'vid'};
 		
-		//header("Location: http://tiinyhouse.com/thanks"); /* Redirect browser */
-		//exit();
+		header("Location: http://tiinyhouse.com/thanks"); /* Redirect browser */
+		exit();
 		
 	/*		
 		//Update Contact
