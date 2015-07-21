@@ -5,6 +5,16 @@
 	var country = 'United States';
  
 	
+	
+
+	$("#email").keypress(function(event) {
+		if (event.which == 13) {
+			event.preventDefault();
+			$("#data_form").submit();
+		}
+	});
+
+	
 	function getUrlParameters(){
 		var query = window.location.search;
 		// Skip the leading ?, which should always be there,
