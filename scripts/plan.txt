@@ -69,8 +69,6 @@
 		}
 	  });
 	}
-
-	putUrlDataToInputFields();
 	
 	$.ajax({
 		url: "http://ipinfo.io",
