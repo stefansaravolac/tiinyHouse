@@ -47,7 +47,7 @@
 		success: function(data){
 		
 			console.log(data);
-			var cityRegion = data.city +', '+data.region,
+			var cityRegion = data.city +', '+data.region;
 								
 			var dataFromUrl = getUrlParameters();	
 	
