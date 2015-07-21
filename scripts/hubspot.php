@@ -7,6 +7,16 @@
 		
 		//ONLY ONE FORM WILL BE CALLED AT ONE TIME
 		//FOR DENVER_CO CONTACT FORM
+		
+		print_r("BEGINNING-------------------");		
+		print_r($_POST['denver_co_name']);
+		print_r("-------------------");		
+		print_r($_POST['denver_co_email']);
+		print_r("-------------------");	
+		print_r($_POST['denver_co_phone']);		
+		
+		
+		
 		if(isset($_POST['denver_co_name']){
 			$firstname = $_POST['denver_co_name'];			
 		} else{
@@ -23,7 +33,8 @@
 			$phone = '';
 		}		
 	
-	
+
+/*	
 		//FOR PLAN FORM
 		if( isset($_POST['zipcode']) ){
 			$zipcode = $_POST["zipcode"]; 
@@ -70,11 +81,11 @@
 		if( isset($_POST["email"]) ){
 			$email = $_POST["email"]; 
 		} 
-			
+*/			
 		
 		
 		
-		//print_r($email);
+		print_r("END-------------------");
 		$contacts = new HubSpot_Contacts($HAPIKey);
     
 	
@@ -90,6 +101,7 @@
 						 'email' 		=> $email,
 						 'phone'		=> $phone);
 						 
+		
 		print_r("Params: ");
 		print_r($params);
 		
