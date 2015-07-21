@@ -4,6 +4,27 @@
 		
 		$HAPIKey = '18996f4a-fb67-4f8a-8f91-6ba88e5a9f56';
 		
+		
+		//ONLY ONE FORM WILL BE CALLED AT ONE TIME
+		//FOR DENVER_CO CONTACT FORM
+		if(isset($_POST['denver_co_name']){
+			$firstname = $_POST['denver_co_name'];			
+		} else{
+			$firstname = '';
+		}
+		
+		if(isset($_POST['denver_co_email']){
+			$email = $_POST['denver_co_email'];
+		} 
+		
+		if(isset($_POST['denver_co_phone']){
+			$phone = $_POST['denver_co_phone'];
+		} else{
+			$phone = '';
+		}		
+	
+	
+		//FOR PLAN FORM
 		if( isset($_POST['zipcode']) ){
 			$zipcode = $_POST["zipcode"]; 
 		
@@ -45,8 +66,12 @@
 		} else{
 			$days = '';
 		}
-						
-		$email = $_POST["email"]; 
+		
+		if( isset($_POST["email"]) ){
+			$email = $_POST["email"]; 
+		} 
+			
+		
 		
 		
 		//print_r($email);
@@ -55,14 +80,15 @@
 			
 			//Create Contact
 		$params =  array(
-						 'firstname' 	=> '', 
+						 'firstname' 	=> $firstname, 
 						 'zipcode' 		=> $zipcode, 
 						 'eco' 			=> $eco,
 						 'assembly' 	=> $assembly,
 						 'swapping' 	=> $swapping,
 						 'cost' 		=> $cost,
 						 'days' 		=> $days,
-						 'email' 		=> $email);
+						 'email' 		=> $email,
+						 'phone'		=> $phone);
 		$createdContact = $contacts->create_contact($params);
 		//print_r($createdContact);
 		$newly_created_vid = $createdContact->{'vid'};
