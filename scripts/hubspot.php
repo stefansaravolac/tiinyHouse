@@ -77,7 +77,7 @@
 		//print_r($email);
 		$contacts = new HubSpot_Contacts($HAPIKey);
     
-			
+	
 			//Create Contact
 		$params =  array(
 						 'firstname' 	=> $firstname, 
@@ -89,12 +89,17 @@
 						 'days' 		=> $days,
 						 'email' 		=> $email,
 						 'phone'		=> $phone);
+						 
+		print_r("Params: ");
+		print_r($params);
+		
 		$createdContact = $contacts->create_contact($params);
-		//print_r($createdContact);
+		print_r("Created contact: ");
+		print_r($createdContact);
 		$newly_created_vid = $createdContact->{'vid'};
 		
-		header("Location: http://tiinyhouse.com/thanks"); /* Redirect browser */
-		exit();
+		//header("Location: http://tiinyhouse.com/thanks"); /* Redirect browser */
+		//exit();
 		
 	/*		
 		//Update Contact
