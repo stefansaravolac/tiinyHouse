@@ -17,17 +17,17 @@
 		
 		
 		
-		if(isset($_POST['denver_co_name']){
+		if(isset($_POST['denver_co_name'])){
 			$firstname = $_POST['denver_co_name'];			
 		} else{
 			$firstname = '';
 		}
 		
-		if(isset($_POST['denver_co_email']){
+		if(isset($_POST['denver_co_email'])){
 			$email = $_POST['denver_co_email'];
 		} 
 		
-		if(isset($_POST['denver_co_phone']){
+		if(isset($_POST['denver_co_phone'])){
 			$phone = $_POST['denver_co_phone'];
 		} else{
 			$phone = '';
