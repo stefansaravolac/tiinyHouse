@@ -1,8 +1,13 @@
 <?php    
+		//NOTE - if you uncomment print_r, redirect via header will not work!
+		//So it's either debug with print messages, or redirect
+		
 		require_once './haPiHP-master/class.forms.php';
 		require_once './haPiHP-master/class.contacts.php';
 		
 		$HAPIKey = '18996f4a-fb67-4f8a-8f91-6ba88e5a9f56';
+		
+		
 		
 		
 		//ONLY ONE FORM WILL BE CALLED AT ONE TIME
@@ -74,6 +79,16 @@
 		if( isset($_POST["email"]) ){
 			$email = $_POST["email"]; 
 		} 
+		
+		
+		if( isset($_POST["plan_city"]) ){
+			$city = $_POST["plan_city"];
+           
+		}
+		
+		if( isset($_POST["plan_state"]) ){
+			$state  = $_POST["plan_state"];
+		}
 
 		$contacts = new HubSpot_Contacts($HAPIKey);
     
@@ -99,13 +114,25 @@
 		$createdContact = $contacts->create_contact($params);
 		//print_r("Created contact: ");
 		//print_r($createdContact);
-		$newly_created_vid = $createdContact->{'vid'};
 		
-		header("Location: http://tiinyhouse.com/thanks"); /* Redirect browser */
-		exit();
+		
+		//check if property in response object exists
+		$isSuccessPropertyThere = property_exists($createdContact, "vid")
+		
+		if($isSuccessPropertyThere === true){
+			header("Location: http://tiinyhouse.com/thanks"); /* Redirect browser */
+			exit();
+			
+		} else{
+			header("Location: http://tiinyhouse.com/error"); /* Redirect browser */
+			exit();
+		}
+	
 		
 	/*		
+		$newly_created_vid = $createdContact->{'vid'}; //NECESSARY IF YOU WANT TO USE UPDATE CONTACT
 		//Update Contact
+		
 		$params =  array('lastname' => 'Test' );
 		$updatedContact = $contacts->update_contact($newly_created_vid,$params);
 		print_r($updatedContact);

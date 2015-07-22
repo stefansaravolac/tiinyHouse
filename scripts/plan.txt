@@ -58,6 +58,16 @@
 			document.getElementById("days").value =   parameters[5];
 		}								
 	}
+
+	function putCityAndStateToInputFields(){
+
+		var cityAndState = document.getElementById("city").innerHTML;	
+		var city 	 	 = (cityAndState.split(",")[0]).trim();
+		var state 	 	 = (cityAndState.split(",")[1]).trim();
+
+		document.getElementById("plan_city").value = city;
+		document.getElementById("plan_state").value = state;	
+	}
 	
 	function codeAddress(zipcode) {
 	  geocoder = new google.maps.Geocoder();
@@ -71,6 +81,10 @@
 				state = results[0]['address_components'][component]['long_name'];
 				//alert(results[0]['address_components'][1]['long_name'] + ' , '  + state);
 				document.getElementById("city").innerHTML = results[0]['address_components'][1]['long_name'] + ' , '  + state;
+				
+				//put in callback because if city and state 
+				//is taken from google, it will take some time to get response
+				putCityAndStateToInputFields();
 			  }
 			}
 		  }                                           
@@ -99,6 +113,7 @@
 					ip = data.ip;
 					$('.city-region').text(cityRegion);
 					$('.ip').text(ip);
+					putCityAndStateToInputFields();
 					
 				} else{
 					$('.city-region').text("--------");
