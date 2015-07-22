@@ -112,17 +112,20 @@
 		//print_r($params);
 		
 		$createdContact = $contacts->create_contact($params);
-		print_r("Created contact: ");
-		print_r($createdContact);
+		//print_r("Created contact: ");
+		//print_r($createdContact);
 		
 		
 		//check if property in response object exists
 		$isSuccessPropertyThere = property_exists($createdContact, "vid");
-		print_r(" ");
-		print_r($isSuccessPropertyThere);
-	
-/*	
-		if($isSuccessPropertyThere === true){
+		//print_r(" ");
+		//print_r($isSuccessPropertyThere);
+
+        if(($createdContact->status == 'error') && ($createdContact->message == 'Contact already exists')){
+            header("Location: http://tiinyhouse.com/existing");
+            exit();
+
+        } elseif ($isSuccessPropertyThere === true){
 			header("Location: http://tiinyhouse.com/thanks");
 			exit();
 			
@@ -130,7 +133,7 @@
 			header("Location: http://tiinyhouse.com/error");
 			exit();
 		}
-	*/
+
 		
 	/*		
 		$newly_created_vid = $createdContact->{'vid'}; //NECESSARY IF YOU WANT TO USE UPDATE CONTACT
