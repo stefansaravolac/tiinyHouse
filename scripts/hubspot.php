@@ -117,7 +117,7 @@
 		
 		
 		//check if property in response object exists
-		$isSuccessPropertyThere = property_exists($createdContact, "vid")
+		$isSuccessPropertyThere = property_exists($createdContact, "vid");
 		
 		if($isSuccessPropertyThere === true){
 			header("Location: http://tiinyhouse.com/thanks"); /* Redirect browser */
