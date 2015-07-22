@@ -20,9 +20,11 @@
 		if(isset($_POST['denver_co_phone'])){
 			$phone = $_POST['denver_co_phone'];
             $city  = 'Denver';
+            $state  = 'Colorado';
 		} else{
 			$phone = '';
             $city = '';
+            $state  = '';
 		}		
 	
 
@@ -87,7 +89,8 @@
 						 'days' 		=> $days,
 						 'email' 		=> $email,
 						 'phone'		=> $phone,
-                         'city'         => $city);
+                         'city'         => $city,
+                         'state'        => $state);
 						 
 		
 		//print_r("Params: ");
